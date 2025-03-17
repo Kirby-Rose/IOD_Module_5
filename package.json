@@ -1,0 +1,23 @@
+{
+  "name": "iod_module_5",
+  "version": "1.0.0",
+  "description": "IOD_Module_5_Labs and classwork",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kirby-Rose/IOD_Module_5.git"
+  },
+  "author": "Kirby-Rose",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kirby-Rose/IOD_Module_5/issues"
+  },
+  "homepage": "https://github.com/Kirby-Rose/IOD_Module_5#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
