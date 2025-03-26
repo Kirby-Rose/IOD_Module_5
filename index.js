@@ -1,35 +1,23 @@
 const express = require("express");
+const testRoutes = require("./routes/myTestRoutes");
+const calculatorRoutes = require("./routes/calculatorRoutes");
+const userRoutes = require("./routes/userRoutes");
+
+// const productRoutes = require("./routes/productRoutes");
+
 const app = express();
+
 const port = 3000;
 
-// class App {
-//   constructor(port, route, endpoint) {
-//     this.app = express();
-//     this.app.get(route, endpoint);
-//     this.app.listen(port, () => {
-//       console.log(`Listening at http://localhost:${port}`);
-//     });
-//   }
-// }
+// parse requests of content-type - application/json
+app.use(express.json());
 
 app.use("/", express.static("public"));
+app.use("/mytest", testRoutes);
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+app.use("/calculator", calculatorRoutes);
 
-app.get("/products", (req, response) => {
-  response.send([
-    { id: 1, name: "vanilla scoop", price: 4.5, qtyRemaining: 10 },
-  ]);
-});
-
-app.get("/customers", (req, respose) => {
-  respose.send([
-    { id: 1, Name: "Karen", Dish: "Lasagne" },
-    { id: 2, Name: "Kelly", Dish: "Pasta Salad" },
-  ]);
-});
+app.use("/user", userRoutes);
 
 app.listen(port, () => {
   console.log(`Example app listening
