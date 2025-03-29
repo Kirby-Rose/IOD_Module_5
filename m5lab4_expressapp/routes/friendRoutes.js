@@ -66,12 +66,24 @@ router.get("/info", (req, res) => {
 // 3. Dynamic request param endpoint - get the friend matching the specific ID ie. /friends/3
 router.get("/:id", (req, res) => {
   console.log(req.params);
-  let friendId = req.params.id; // 'id' here will be a value matching anything after the / in the request path
-
+  let friendId = parseInt(req.params.id); // 'id' here will be a value matching anything after the / in the request path
+  console.log("friendId", friendId);
   // Modify this function to find and return the friend matching the given ID, or a 404 if not found
 
   // Modify this response with the matched friend, or a 404 if not found
-  res.json({ result: "Finding friend with ID " + friendId });
+  const findFriend = friends.find((friend) => friend.id === friendId);
+
+  if (friendId && typeof friendId === "number" && findFriend) {
+    res.json({
+      result: "Finding friend with ID " + friendId,
+      body: findFriend,
+    });
+  } else {
+    res.status(404);
+    res.json({
+      result: "No Friend match this ID" + friendId,
+    });
+  }
 });
 
 // a POST request with data sent in the body of the request, representing a new friend to add to our list
@@ -100,19 +112,12 @@ router.put("/:id", (req, res) => {
   let updatedFriend = req.body;
 
   // Replace the old friend data for friendId with the new data from updatedFriend
-  console.log("tupe of", typeof friendId);
+
   // Modify this response with the updated friend, or a 404 if not found
-  if (friendId && typeof friendId === "number") {
-    res.json({
-      result: "Updated friend with ID " + friendId,
-      data: updatedFriend,
-    });
-  } else {
-    res.status(404);
-    res.json({
-      result: "No Friend match this ID" + friendId,
-    });
-  }
+  res.json({
+    result: "Updated friend with ID " + friendId,
+    data: updatedFriend,
+  });
 });
 
 module.exports = router;
