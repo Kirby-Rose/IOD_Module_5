@@ -1,5 +1,5 @@
 const express = require("express");
-// const router = express.Router();
+const router = express.Router();
 const calculatorController = require("../controllers/calculatorController.js");
 
 // //First one
@@ -22,13 +22,13 @@ const calculatorController = require("../controllers/calculatorController.js");
 
 router.get("/add", (req, res) => {
   calculatorController.addition(req, res);
-  // const number1 = parseInt(req.query?.num1) || 0;
-  // const number2 = parseInt(req.query?.num2) || 0;
+  const number1 = parseInt(req.query?.num1) || 0;
+  const number2 = parseInt(req.query?.num2) || 0;
 
-  // const result = number1 + number2;
-  // console.log("result", result);
-  // res.status(200);
-  // res.send({ result });
+  const result = number1 + number2;
+  console.log("result", result);
+  res.status(200);
+  res.send({ result });
 });
 
 router.get("/multiply", (req, res) => {
