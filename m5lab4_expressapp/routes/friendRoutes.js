@@ -108,16 +108,26 @@ router.post("/", (req, res) => {
 
 // 4. Complete this new route for a PUT request which will update data for an existing friend
 router.put("/:id", (req, res) => {
-  let friendId = req.params.id;
+  let friendId = parseInt(req.params.id, 10);
   let updatedFriend = req.body;
 
   // Replace the old friend data for friendId with the new data from updatedFriend
-
   // Modify this response with the updated friend, or a 404 if not found
-  res.json({
-    result: "Updated friend with ID " + friendId,
-    data: updatedFriend,
-  });
+  let friendIndex = friends.findIndex((friend) => friend.id == friendId);
+
+  if (friendIndex === -1) {
+    res.status(404).json({ error: "Friend not found with ID " + friendId });
+    return;
+  }
+
+  if (updatedFriend.id && updatedFriend.id != friendId) {
+    res.status(400).json({ error: "Friend ID in body must match the URL ID" });
+    return;
+  }
+
+  friends[friendIndex] = { ...friends[friendIndex], ...updatedFriend };
+
+  res.json(friends[friendIndex]);
 });
 
 module.exports = router;

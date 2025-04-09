@@ -14,6 +14,10 @@ router.get("/headers", (req, res) => {
   res.json(req.headers);
 });
 
+router.get("/", (req, res) => {
+  res.json({ result: users });
+});
+
 // Dynamic request param endpoint - get the user matching the specific ID ie. /users/3
 router.get("/:id", (req, res) => {
   console.log(req.params);

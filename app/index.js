@@ -1,12 +1,11 @@
+const swaggerUi = require("swagger-ui-express");
 const app = require("./app");
+swaggerDocument = require("./swagger.json");
+
 const port = 3000;
-const friendRoutes = require("./routes/friendRoutes");
 
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // parse requests of content-type - application/json (needed for POST and PUT requests using req.body)
-app.use(express.json());
-
-app.use("/", express.static("public"));
-app.use("/friends", friendRoutes);
 
 app.listen(port, () => {
   console.log(`Example app listening
